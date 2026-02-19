@@ -93,6 +93,13 @@ To do this, follow the same steps as for cAdvisor, but instead of using the cAdv
 
 Grafana can be deployed as a one-click service in Coolify.
 
+To allow Grafana to connect to Prometheus via the docker internal network, edit the Grafana Docker compose to add the `host.docker.internal:host-gateway`.
+```yaml
+grafana:
+  extra_hosts:
+    - 'host.docker.internal:host-gateway'
+```
+
 When it's running, navigate to the Datasources tab and configure Prometheus as a datasource. The only thing that you should need to fill in is the URL, which you should set to `http://host.docker.internal:9090`
 
 You should already be able to see your docker metrics when you go to the Explore tab.
